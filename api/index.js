@@ -24,7 +24,7 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-  origin: ['http://localhost:5173' ,'https://task-management-4fyb.onrender.com' ,'https://task-management-ten-sand.vercel.app'],
+  origin: ['http://localhost:3000' ],
   credentials: true 
 }));
 
@@ -60,8 +60,8 @@ app.use((error,req,res,next)=>{
   })})
 
 //listing on port 3000
-app.listen(3000,()=>{
+app.listen(3001,()=>{
    
-   console.log('listning on port 3000')
+   console.log('listning on port 3001')
    connectDb()
 })
