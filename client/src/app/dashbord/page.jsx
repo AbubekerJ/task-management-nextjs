@@ -115,6 +115,7 @@ function Dashboard() {
   }
 
   return (
+    <>
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="container mx-auto">
         <div className="flex justify-between items-center mb-6">
@@ -172,8 +173,10 @@ function Dashboard() {
           </div>
         )}
       </div>
-      {showTaskForm && <TaskForm mode={'create'} setShowTaskForm={setShowTaskForm} fetchData={fetchData} filteredUsers={filteredUsers} />}
+     
     </div>
+    {showTaskForm && <TaskForm mode={'create'} setShowTaskForm={setShowTaskForm} fetchData={fetchData} filteredUsers={filteredUsers} />}
+    </>
   );
 }
 
