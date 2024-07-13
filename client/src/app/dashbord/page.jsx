@@ -38,6 +38,7 @@ function Dashboard() {
   };
 
   const getAllUsers = async () => {
+    setLoading(true)
     try {
       const res = await fetch('https://task-management-nextjs.onrender.com/api/getalluser');
       const data = await res.json();
