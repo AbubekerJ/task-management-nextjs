@@ -25,7 +25,7 @@ const SignIn = () => {
     try {
 
       setLoding(true) 
-    const res = await fetch('http://localhost:3001/api/signin', {
+    const res = await fetch('https://task-management-nextjs.onrender.com/api/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ const SignIn = () => {
         </form>
         
         <div className="flex mt-3 gap-1">
-          <p className="text-gray-700">Don't Have an Account?</p>
+          <p className="text-gray-700">Dont Have an Account?</p>
           <Link href='/register'>
           <span className="text-blue-500">Register</span>
           </Link>

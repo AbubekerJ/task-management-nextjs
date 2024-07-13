@@ -16,7 +16,7 @@ function Tasks({ task, fetchData, filteredUsers }) {
     try {
       
      
-      const res = await fetch(`http://localhost:3001/api/updateTask/${theTask}`, {
+      const res = await fetch(`https://task-management-nextjs.onrender.com/api/updateTask/${theTask}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -45,7 +45,7 @@ function Tasks({ task, fetchData, filteredUsers }) {
   const handleDelete = async (theTask) => {
     try {
       
-      const res = await fetch(`http://localhost:3001/api/deleteTask/${theTask}`, {
+      const res = await fetch(`https://task-management-nextjs.onrender.com/api/deleteTask/${theTask}`, {
         method: 'DELETE',
         credentials: 'include'
       });

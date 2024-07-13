@@ -20,7 +20,7 @@ function Dashboard() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch(`http://localhost:3001/api/getUserTasks?sort=${sortOrder}`, {
+      const res = await fetch(`https://task-management-nextjs.onrender.com/api/getUserTasks?sort=${sortOrder}`, {
         credentials: 'include',
       });
       const data = await res.json();
@@ -39,7 +39,7 @@ function Dashboard() {
 
   const getAllUsers = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/getalluser');
+      const res = await fetch('https://task-management-nextjs.onrender.com/api/getalluser');
       const data = await res.json();
       if (data.success === false) {
         setError(data.message);
@@ -58,7 +58,7 @@ function Dashboard() {
 
   const handleSignOut = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/signout');
+      const res = await fetch('https://task-management-nextjs.onrender.com/api/signout');
       const data = await res.json();
       if (data.success === false) {
         return;
@@ -73,7 +73,7 @@ function Dashboard() {
 
   const handleCompletedTask = async () => {
     try {
-      const res = await fetch(`http://localhost:3001/api/getUserTasks?status=true`, {
+      const res = await fetch(`https://task-management-nextjs.onrender.com/api/getUserTasks?status=true`, {
         credentials: 'include',
       });
       const data = await res.json();
@@ -89,7 +89,7 @@ function Dashboard() {
 
   const handlePendingTask = async () => {
     try {
-      const res = await fetch(`http://localhost:3001/api/getUserTasks?status=false`, {
+      const res = await fetch(`https://task-management-nextjs.onrender.com/api/getUserTasks?status=false`, {
         credentials: 'include',
       });
       const data = await res.json();
