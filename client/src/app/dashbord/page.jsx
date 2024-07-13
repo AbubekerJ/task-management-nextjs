@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
-import Tasks from '@/Components/Tasks/Tasks';
-import TaskForm from '@/Components/TaskForm/TaskForm';
+import Tasks from '../Components/Tasks/Tasks';
+import TaskForm from '../Components/TaskForm/TaskForm'
 import { useUser } from '../Context/UserContext';
 import { useRouter } from 'next/navigation';
 
