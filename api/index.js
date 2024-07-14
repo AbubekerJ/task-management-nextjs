@@ -7,6 +7,8 @@ import pool from './db.js'
 import cookieParser from 'cookie-parser'
 import tasksRouter from './routes/tasks.route.js'
 
+import { swaggerUi ,specs } from './swagger.js'
+
 
 
 
@@ -47,6 +49,11 @@ const connectDb = async () => {
 app.use('/api' , auhtRouter)
 app.use('/api' , userRout)
 app.use('/api' , tasksRouter)
+
+
+//swagger documentation middleware
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
 
 //error handling midleware
 app.use((error,req,res,next)=>{
