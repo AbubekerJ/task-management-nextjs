@@ -1,7 +1,8 @@
+import dotenv from 'dotenv';
 
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-
+dotenv.config();
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -12,7 +13,7 @@ const options = {
     },
     servers: [
       {
-        url: 'https://task-management-nextjs.onrender.com',
+        url: process.env.API_ENDPOINT
       },
       {
         url: 'http://localhost:3001',

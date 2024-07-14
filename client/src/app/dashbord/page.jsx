@@ -21,7 +21,7 @@ function Dashboard() {
   const fetchData = async () => {
     setLoading(true)
     try {
-      const res = await fetch(`https://task-management-nextjs.onrender.com/api/getUserTasks?sort=${sortOrder}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/getUserTasks?sort=${sortOrder}`, {
         credentials: 'include',
       });
       const data = await res.json();
@@ -41,7 +41,7 @@ function Dashboard() {
   const getAllUsers = async () => {
     setLoading(true)
     try {
-      const res = await fetch('https://task-management-nextjs.onrender.com/api/getalluser');
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/getalluser`);
       const data = await res.json();
       if (data.success === false) {
         setError(data.message);
@@ -60,7 +60,7 @@ function Dashboard() {
 
   const handleSignOut = async () => {
     try {
-      const res = await fetch('https://task-management-nextjs.onrender.com/api/signout');
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/signout`);
       const data = await res.json();
       if (data.success === false) {
         return;
@@ -75,7 +75,7 @@ function Dashboard() {
 
   const handleCompletedTask = async () => {
     try {
-      const res = await fetch(`https://task-management-nextjs.onrender.com/api/getUserTasks?status=true`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/getUserTasks?status=true`, {
         credentials: 'include',
       });
       const data = await res.json();
@@ -91,7 +91,7 @@ function Dashboard() {
 
   const handlePendingTask = async () => {
     try {
-      const res = await fetch(`https://task-management-nextjs.onrender.com/api/getUserTasks?status=false`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/getUserTasks?status=false`, {
         credentials: 'include',
       });
       const data = await res.json();
