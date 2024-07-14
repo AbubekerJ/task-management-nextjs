@@ -12,11 +12,12 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3001',
-      },
-      {
         url: 'https://task-management-nextjs.onrender.com',
       },
+      {
+        url: 'http://localhost:3001',
+      },
+      
     ],
   },
   apis: ['./api/routes/*.js'], 
