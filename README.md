@@ -117,6 +117,6 @@ API documentation is available at `/api-docs` using Swagger UI.
 ### Accessing Swagger UI
 
 - For local environment: `http://localhost:3001/api-docs`
-- (mine)For production: `https://task-management-nextjs.onrender.com/api-docs`
- - (Yours)For production: `https://<your backend api url>/api-docs`
+
+ -For production: `https://<your backend api url>/api-docs`
 
