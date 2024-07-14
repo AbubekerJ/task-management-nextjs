@@ -93,6 +93,8 @@ router.delete('/deleteTask/:Taskid' ,verifyToken ,  deleteTask)
  *                 type: boolean
  *               assigned_to:
  *                 type: integer
+ *               created_by:
+ *                 type: integer
  *     responses:
  *       200:
  *         description: Task updated successfully
