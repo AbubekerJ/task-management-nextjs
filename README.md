@@ -12,9 +12,10 @@
 - [Usage](#usage)
   - [Running the Application Locally](#running-the-application-locally)
   - [API Endpoints](#api-endpoints)
+- [ Deployment Instructions](#Deployment-Instructions)
 - [API Documentation](#api-documentation)
   - [Accessing Swagger UI](#accessing-swagger-ui)
-  - [ Deployment Instructions](#Deployment-Instructions)
+
 
 ## Project Description
 The Task Management System is a web application that allows users to create, update, delete and assign user and manage tasks. Users can assign tasks to other users and filter tasks based on their status (completed or pending).
