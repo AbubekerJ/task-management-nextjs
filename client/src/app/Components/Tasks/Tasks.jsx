@@ -4,6 +4,7 @@ import  { useState } from 'react';
 import { FaEdit, FaTrash, FaCheck } from 'react-icons/fa';
 import TaskForm from '../TaskForm/TaskForm';
 import toast from 'react-hot-toast';
+import { tree } from 'next/dist/build/templates/app-page';
 
 function Tasks({ task, fetchData, filteredUsers }) {
   const [isChecked, setIsChecked] = useState(task.status);
@@ -13,6 +14,7 @@ function Tasks({ task, fetchData, filteredUsers }) {
 
   const handleCheckboxChange = async (e, theTask) => {
     const updatedStatus = e.target.checked;
+    setLoading(true)
     try {
       
      
@@ -31,18 +33,23 @@ function Tasks({ task, fetchData, filteredUsers }) {
       const data = await res.json();
       if (data.success === false) {
         toast.error(data.message)
+        setLoading(false)
         return;
       }
       console.log(data);
       toast.success('Status update successfully')
-      setIsChecked(updatedStatus); // Update local state first
-      fetchData(); // Then fetch the updated data
+      setIsChecked(updatedStatus); 
+
+      fetchData(); 
+      setLoading(false)
     } catch (error) {
       toast.error(error.message)
+      setLoading(false)
     }
   };
 
   const handleDelete = async (theTask) => {
+    setLoading(true)
     try {
       
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/deleteTask/${theTask}`, {
@@ -52,12 +59,14 @@ function Tasks({ task, fetchData, filteredUsers }) {
       const data = await res.json();
       if (data.success === false) {
         toast.error(data.message)
-   
+         setLoading(false)
         return;
       }
+      setLoading(false)
       fetchData();
     } catch (error) {
      toast.error(error.message)
+     setLoading(false)
     }
   };
 
@@ -79,11 +88,12 @@ function Tasks({ task, fetchData, filteredUsers }) {
           <button onClick={() => setShowTaskForm(true)} className="text-blue-500 hover:text-blue-700">
             <FaEdit />
           </button>
-          <button onClick={() => handleDelete(task.id)} className="text-red-500 hover:text-red-700">
+          <button disabled={loading} onClick={() => handleDelete(task.id)} className="text-red-500 hover:text-red-700">
             <FaTrash />
           </button>
           <label className="flex items-center space-x-2">
             <input
+              disabled={loading}
               type="checkbox"
               checked={isChecked}
               onChange={(e) => handleCheckboxChange(e, task.id)}
