@@ -46,9 +46,7 @@ export const deleteTask = async (req, res, next) => {
 
     const result = await pool.query('DELETE FROM tasks WHERE id = $1 RETURNING *', [Taskid]);
 
-    if (result.rowCount === 0) {
-      return next(createError(404, 'Task Not Found'));
-    }
+    
 
     res.status(200).json({ message: 'Task deleted successfully' });
   } catch (error) {

@@ -32,7 +32,7 @@ export const UserProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      // Simulate an API call for user login
+      
       
        
        localStorage.setItem('currentUser', JSON.stringify(user)); // Save user to local storage
