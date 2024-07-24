@@ -17,6 +17,7 @@ export const register = async(req, res , next)=>{
         );
         res.json('user Created Successfully ');
       } catch (err) {
+       
         if (err.code === '23505') {
           // Handle duplicate key value violates unique constraint error
           if (err.constraint === 'users_username_key') {
@@ -26,9 +27,8 @@ export const register = async(req, res , next)=>{
           if (err.constraint === 'users_email_key') {
             
             return next(createError(409 ,'Email is already registered'));
-          }
-          next(createError(500 , 'Unable to connect to the server. Please check your network connection and try again.'));
-        }
+          } }
+           next(createError(500, 'Unable to connect to the server. Please check your network connection and try again.'));
       }
 
 }
@@ -77,7 +77,7 @@ export const signin = async (req, res, next) => {
 export const signOut = (req, res, next)=>{
   try {
     res.clearCookie('access_token')
-    res.status(200).json({message:'sign out succcesfull '})
+    res.status(200).json({"message": "sign out successfull "})
 } catch (error) {
   next(createError(500 , 'Unable to connect to the server. Please check your network connection and try again.'));
  
