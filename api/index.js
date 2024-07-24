@@ -1,71 +1,74 @@
-import { jest } from '@jest/globals';
-import { register } from '../controllers/auth.controller.js';
-import pool from '../db.js';
-import bcryptjs from 'bcryptjs';
-import { createError } from '../utils/createError.js';
+import express from 'express'
+import auhtRouter from './routes/auth.route.js'
+import userRout from './routes/user.rout.js'
+import cors from 'cors'
+import dotenv from 'dotenv'
+import pool from './db.js'
+import cookieParser from 'cookie-parser'
+import tasksRouter from './routes/tasks.route.js'
 
-jest.mock('../db.js');
-jest.mock('bcryptjs');
-jest.mock('../utils/createError.js');
+import { swaggerUi ,specs } from './swagger.js'
 
-describe('register function', () => {
-  let req, res, next;
 
-  beforeEach(() => {
-    req = {
-      body: {
-        username: 'testuser',
-        email: 'test@example.com',
-        password: 'password123',
-      },
-    };
-    res = {
-      json: jest.fn(),
-    };
-    next = jest.fn();
-  });
 
-  it('should create a user successfully', async () => {
-    const hashedPass = 'hashedPassword';
-    bcryptjs.hashSync.mockReturnValue(hashedPass);
-    pool.query.mockResolvedValue({ rows: [{ username: 'testuser', email: 'test@example.com' }] });
 
-    await register(req, res, next);
 
-    expect(bcryptjs.hashSync).toHaveBeenCalledWith('password123', 10);
-    expect(pool.query).toHaveBeenCalledWith(
-      'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *',
-      ['testuser', 'test@example.com', hashedPass]
-    );
-    expect(res.json).toHaveBeenCalledWith('user Created Successfully');
-    expect(next).not.toHaveBeenCalled();
-  });
+//configure env
+dotenv.config()
 
-  it('should handle duplicate username error', async () => {
-    const error = { code: '23505', constraint: 'users_username_key' };
-    pool.query.mockRejectedValue(error);
+//initialize express
+const app = express()
 
-    await register(req, res, next);
 
-    expect(next).toHaveBeenCalledWith(createError(409, 'Username is already taken'));
-  });
 
-  it('should handle duplicate email error', async () => {
-    const error = { code: '23505', constraint: 'users_email_key' };
-    pool.query.mockRejectedValue(error);
 
-    await register(req, res, next);
+//middlewares
+app.use(express.json())
+app.use(cookieParser())
+app.use(cors({
+  origin: ['http://localhost:3000' ,'https://my-task-eight.vercel.app' ],
+  credentials: true 
+}));
 
-    expect(next).toHaveBeenCalledWith(createError(409, 'Email is already registered'));
-  });
 
-  it('should handle other errors', async () => {
-    const error = new Error('Some other error');
-    pool.query.mockRejectedValue(error);
 
-    await register(req, res, next);
 
-    expect(next).toHaveBeenCalledWith(expect.any(Error));
-    expect(next.mock.calls[0][0].message).toBe('Some other error');
-  });
-});
+// Connect database
+const connectDb = async () => {
+    try {
+      const client = await pool.connect();
+      console.log('Connected to the database');
+      client.release();
+    } catch (err) {
+      console.error('Database connection error', err.stack);
+    }
+  };
+
+
+//routes
+app.use('/api' , auhtRouter)
+app.use('/api' , userRout)
+app.use('/api' , tasksRouter)
+
+
+//swagger documentation middleware
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
+
+//error handling midleware
+app.use((error,req,res,next)=>{
+  const statusCode =  error.statusCode || 500
+  const message = error.message||'Please Check Your Connecton'
+
+  return res.status(statusCode).json({
+      "success":false,
+      "statusCode":statusCode,
+      "message":message
+  })})
+
+//listing on port 3000
+app.listen(3001,()=>{
+
+   console.log('listning on port 3001')
+   connectDb()
+})
