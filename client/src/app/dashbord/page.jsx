@@ -136,7 +136,7 @@ function Dashboard() {
               </button>
               <button
                 onClick={handleSignOut}
-                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-300"
+                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-200"
               >
                 Sign Out
               </button>
