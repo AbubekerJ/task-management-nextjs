@@ -47,7 +47,7 @@ function TaskForm({ mode, setShowTaskForm, task, filteredUsers, fetchData }) {
         const data = await res.json();
 
         if (data.success === false) {
-          setError(data.message);
+          toast.error(data.message)
           setLoading(false);
           return;
         } else {
