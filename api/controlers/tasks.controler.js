@@ -81,9 +81,6 @@ export const updateTask = async (req, res, next) => {
       [title, description, status, assigned_to, Taskid]
     );
 
-    if (result.rowCount === 0) {
-      return next(createError(404, 'Task Not Found'));
-    }
 
     res.status(200).json(result.rows[0]);
   
@@ -98,32 +95,37 @@ export const updateTask = async (req, res, next) => {
 
 
 
-
 // Fetch tasks created by or assigned to the user, optionally filtered by status and sorted by date
 export const getUserTasks = async (req, res, next) => {
   const userId = req.user.id;
   const { status, sort } = req.query;
   
-  let query = 'SELECT * FROM tasks WHERE (created_by = $1 OR assigned_to = $1)';
+  let query = `
+    SELECT tasks.*, users.username as assigned_to_username 
+    FROM tasks 
+    LEFT JOIN users ON tasks.assigned_to = users.id 
+    WHERE (tasks.created_by = $1 OR tasks.assigned_to = $1)
+  `;
   const params = [userId];
 
-  // Add status filter if provided
+  // status filter if provided
   if (status === 'true' || status === 'false') {
-    query += ' AND status = $2';
+    query += ' AND tasks.status = $2';
     params.push(status === 'true');
   }
 
-  // Add sorting if provided
+  // sorting if provided
   if (sort === 'oldest') {
-    query += ' ORDER BY created_at ASC';
+    query += ' ORDER BY tasks.created_at ASC';
   } else if (sort === 'latest') {
-    query += ' ORDER BY created_at DESC';
+    query += ' ORDER BY tasks.created_at DESC';
   }
 
   try {
     const result = await pool.query(query, params);
     res.status(200).json(result.rows);
+    console.log(result.rows);
   } catch (error) {
-    next(createError(500 , 'Unable to connect to the server. Please check your network connection and try again.'));
+    next(createError(500, 'Unable to connect to the server. Please check your network connection and try again.'));
   }
 };

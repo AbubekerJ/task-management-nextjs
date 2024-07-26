@@ -1,15 +1,15 @@
 import { jest } from '@jest/globals';
-import { signin } from '../controlers/auth.controler.js'; 
-import pool from '../db.js';
+import { signin } from '../../controlers/auth.controler.js';
+import pool from '../../db.js'
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { createError } from '../utils/createError.js';
+import { createError } from '../../utils/createError.js';
 
 // Mock dependencies
-jest.mock('../db.js');
+jest.mock('../../db.js');
 jest.mock('bcryptjs');
 jest.mock('jsonwebtoken');
-jest.mock('../utils/createError.js');
+jest.mock('../../utils/createError.js');
 
 describe('Signin Function', () => {
   let req, res, next;

@@ -1,9 +1,9 @@
 import { jest } from '@jest/globals';
-import { signOut } from '../controlers/auth.controler.js'; 
-import { createError } from '../utils/createError.js';
+import { signOut } from '../../controlers/auth.controler.js'; 
+import { createError } from '../../utils/createError.js';
 
 // Mock the dependencies
-jest.mock('../utils/createError.js');
+jest.mock('../../utils/createError.js');
 
 describe('SignOut Function', () => {
   let req, res, next;

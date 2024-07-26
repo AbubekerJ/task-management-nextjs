@@ -11,6 +11,8 @@ function Tasks({ task, fetchData, filteredUsers }) {
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [loading , setLoading] = useState(false)
 
+  console.log(task)
+
 
   const handleCheckboxChange = async (e, theTask) => {
     const updatedStatus = e.target.checked;
@@ -79,10 +81,7 @@ function Tasks({ task, fetchData, filteredUsers }) {
           <p className={`px-2 py-1 rounded ${isChecked ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'}`}>
             {isChecked ? 'Completed' : 'Pending'}
           </p>
-          <p className="text-gray-500">
-           
-            {task.assigned_to ? ' Assigned ' : '  Unassigned'}
-          </p>
+          <p className="text-gray-500 mb-2">{task.assigned_to?  `Assigned To: ${task.assigned_to_username}`:  'Unassigned'}</p>
         </div>
         <div className="flex justify-end space-x-2">
           <button onClick={() => setShowTaskForm(true)} className="text-blue-500 hover:text-blue-700">

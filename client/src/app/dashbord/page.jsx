@@ -31,6 +31,7 @@ function Dashboard() {
         return;
       }
       setTasks(data.tasks || data);
+      console.log(data)
       setLoading(false);
     } catch (error) {
       setError(error.message);

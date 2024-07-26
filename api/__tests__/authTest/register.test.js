@@ -1,13 +1,13 @@
 import { jest } from '@jest/globals';
-import { register } from '../controlers/auth.controler.js';
-import pool from '../db.js';
+import { register } from '../../controlers/auth.controler.js';
+import pool from '../../db.js';
 import bcryptjs from 'bcryptjs';
-import { createError } from '../utils/createError.js';
+import { createError} from '../../utils/createError.js';
 
 // Mock the dependencies
-jest.mock('../db.js');
+jest.mock('../../db.js');
 jest.mock('bcryptjs');
-jest.mock('../utils/createError.js');
+jest.mock('../../utils/createError.js');
 
 describe('register function', () => {
   let req, res, next;
