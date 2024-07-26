@@ -71,7 +71,7 @@ export const updateTask = async (req, res, next) => {
     }
 
   
- if (req.user.id !== task.created_by && req.user.id !== task.assigned_to) {
+ if (req.user.id !== task.created_by ) {
   return next(createError(401, 'You can only update your task'));
 }
 

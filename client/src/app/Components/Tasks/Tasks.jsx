@@ -38,7 +38,7 @@ function Tasks({ task, fetchData, filteredUsers }) {
         setLoading(false)
         return;
       }
-      console.log(data);
+    
       toast.success('Status update successfully')
       setIsChecked(updatedStatus); 
 

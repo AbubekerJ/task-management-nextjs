@@ -30,6 +30,7 @@ function Dashboard() {
         setLoading(false);
         return;
       }
+      
       setTasks(data.tasks || data);
     
       setLoading(false);
@@ -68,7 +69,7 @@ function Dashboard() {
       }
       router.push('/');
     } catch (error) {
-      console.log(error);
+      
     } finally {
       signOut();
     }
