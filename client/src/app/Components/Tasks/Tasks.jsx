@@ -11,7 +11,7 @@ function Tasks({ task, fetchData, filteredUsers }) {
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [loading , setLoading] = useState(false)
 
-  console.log(task)
+
 
 
   const handleCheckboxChange = async (e, theTask) => {
