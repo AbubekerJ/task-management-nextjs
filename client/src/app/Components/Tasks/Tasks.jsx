@@ -77,11 +77,15 @@ function Tasks({ task, fetchData, filteredUsers }) {
       <div className="bg-white shadow-lg rounded-lg p-6">
         <h2 className="text-xl font-bold mb-2">{task.title}</h2>
         <p className="text-gray-700 mb-4">{task.description}</p>
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex flex-row gap-2 sm:flex justify-between items-center mb-4 ">
           <p className={`px-2 py-1 rounded ${isChecked ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'}`}>
             {isChecked ? 'Completed' : 'Pending'}
           </p>
-          <p className="text-gray-500 mb-2">{task.assigned_to?  `Assigned To: ${task.assigned_to_username}`:  'Unassigned'}</p>
+             <div className='flex flex-col text-sm text-gray-500'>
+             <span>{task.assigned_to ? `Assigned by: ${task.created_by_username}` : 'Unassigned'}</span> 
+             <span>{task.assigned_to ? `Assigned to: ${task.assigned_to_username}` : 'Unassigned'}</span> 
+             </div>
+            
         </div>
         <div className="flex justify-end space-x-2">
           <button onClick={() => setShowTaskForm(true)} className="text-blue-500 hover:text-blue-700">

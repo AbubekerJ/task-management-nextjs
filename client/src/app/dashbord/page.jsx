@@ -51,7 +51,7 @@ function Dashboard() {
       }
       setUsers(data.users);
     } catch (error) {
-      setError(error);
+      setError(error.message);
     }
   };
 
@@ -69,7 +69,7 @@ function Dashboard() {
       }
       router.push('/');
     } catch (error) {
-      
+      setError(error.message);
     } finally {
       signOut();
     }
@@ -87,7 +87,7 @@ function Dashboard() {
       }
       setTasks(data);
     } catch (error) {
-      setError(error);
+      setError(error.message);
     }
   };
 

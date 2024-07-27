@@ -101,11 +101,12 @@ export const getUserTasks = async (req, res, next) => {
   const { status, sort } = req.query;
   
   let query = `
-    SELECT tasks.*, users.username as assigned_to_username 
-    FROM tasks 
-    LEFT JOIN users ON tasks.assigned_to = users.id 
-    WHERE (tasks.created_by = $1 OR tasks.assigned_to = $1)
-  `;
+  SELECT tasks.*, creator.username as created_by_username, assignee.username as assigned_to_username 
+  FROM tasks 
+  LEFT JOIN users as creator ON tasks.created_by = creator.id 
+  LEFT JOIN users as assignee ON tasks.assigned_to = assignee.id 
+  WHERE (tasks.created_by = $1 OR tasks.assigned_to = $1)
+`;
   const params = [userId];
 
   // status filter if provided
