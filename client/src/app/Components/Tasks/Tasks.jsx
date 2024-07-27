@@ -91,7 +91,7 @@ function Tasks({ task, fetchData, filteredUsers }) {
           <button onClick={() => setShowTaskForm(true)} className="text-blue-500 hover:text-blue-700">
             <FaEdit />
           </button>
-          <button disabled={loading} onClick={() => handleDelete(task.id)} className="text-red-500 hover:text-red-700">
+          <button disabled={loading} onClick={() => handleDelete(task.id)} className="text-red-500 hover:text-red-600">
             <FaTrash />
           </button>
           <label className="flex items-center space-x-2">
