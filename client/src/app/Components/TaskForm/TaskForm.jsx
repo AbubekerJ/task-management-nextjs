@@ -37,7 +37,14 @@ function TaskForm({ mode, setShowTaskForm, task, filteredUsers, fetchData }) {
   
     setLoading(true);
     try {
+     
       if (editMode) {
+        if(task.created_by_username!==currentUser.username){
+          toast.error('You can only complete Assigned task')
+          setLoading(false)
+          return;
+        }
+  
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/updateTask/${task.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -82,7 +89,7 @@ function TaskForm({ mode, setShowTaskForm, task, filteredUsers, fetchData }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center ">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg mx-4">
         <h2 className="text-xl font-bold mb-4">{editMode ? 'Edit Task' : 'Create Task'}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
