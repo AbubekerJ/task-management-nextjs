@@ -77,7 +77,7 @@ const SignIn = () => {
            
             className="border p-3 rounded-lg bg-gray-800 text-white uppercase hover:bg-gray-600 transition duration-300 ease-in-out"
             >
-              {loading? 'LODING...':'signin'}
+              {loading? 'LOADING...':'signin'}
              
                
           </button>
