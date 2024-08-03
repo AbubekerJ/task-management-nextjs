@@ -67,12 +67,12 @@ function Dashboard() {
       if (data.success === false) {
         return;
       }
+      signOut();
       router.push('/');
+     
     } catch (error) {
       setError(error.message);
-    } finally {
-      signOut();
-    }
+    } 
   };
 
   const handleCompletedTask = async () => {
@@ -108,10 +108,12 @@ function Dashboard() {
   };
 
   if (!currentUser) {
+    
     return (
       <div className="flex items-center justify-center h-screen bg-gray-100">
         <h1 className="text-2xl font-semibold text-gray-700 animate-pulse">
           Loading... hopefully not for long
+
         </h1>
       </div>
     );

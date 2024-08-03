@@ -16,7 +16,7 @@ const SignIn = () => {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.id]: e.target.value });
-    console.log(form);
+   
   };
 
   const handelSubmit = async (e) => {
@@ -34,16 +34,16 @@ const SignIn = () => {
       credentials: 'include', 
     });
     const data = await res.json();
-    console.log(data);
+  
     if (data.success === false) {
       setLoding(false)
        toast.error(data.message)
       return;
     }
-    console.log(data)
+    
     toast.success('sign In successfull')
     signIn(data)
-   
+  
     router.push('/dashbord')
     } catch (error) {
       setLoding(false)

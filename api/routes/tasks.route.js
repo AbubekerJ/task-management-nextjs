@@ -35,7 +35,7 @@ const router = express.Router()
  *       500:
  *         description: Unable to connect to the server
  */
-router.post('/createtask' ,  CreateTask)
+router.post('/createtask' ,verifyToken,  CreateTask)
 
 //delete task
 /**
