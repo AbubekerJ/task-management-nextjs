@@ -63,7 +63,7 @@ export const signin = async (req, res, next) => {
     const { password: removedPassword, ...rest } = validUser;
 
     res.cookie("access_token", token, { httpOnly: true,
-       sameSite: 'None', 
+       sameSite: 'Strict', 
       secure: true
  }).json(rest);
 
