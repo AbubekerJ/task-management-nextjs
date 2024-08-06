@@ -1,6 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 // Create a context
 const UserContext = createContext();
@@ -13,46 +14,38 @@ export const useUser = () => {
 // Create a provider component
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(true); // Start loading as true
-  const [error, setError] = useState(null);
 
-  // Load user from local storage when the component mounts
+
+  
   useEffect(() => {
     
       const storedUser =  localStorage.getItem('currentUser');
       if (storedUser) {
           setCurrentUser(JSON.parse(storedUser));
       }
-      setLoading(false); // Set loading to false after checking local storage
-     
     
   }, []);
 
   const signIn = async (user) => {
-    setLoading(true);
-    setError(null);
+   
     try {
-      
-      
-       
-       localStorage.setItem('currentUser', JSON.stringify(user)); // Save user to local storage
-        setLoading(false);
+
+       localStorage.setItem('currentUser', JSON.stringify(user)); 
         setCurrentUser(user);
    
     } catch (error) {
-      setError(error);
-      setLoading(false);
+      toast.error(error)
     }
   };
 
   const signOut = async () => {
     setCurrentUser(null);
-    await localStorage.removeItem('currentUser'); // Remove user from local storage
+    await localStorage.removeItem('currentUser');
   };
 
   return (
     <UserContext.Provider
-      value={{ currentUser, loading, error, signIn, signOut }}
+      value={{ currentUser,signIn, signOut }}
     >
       {children}
     </UserContext.Provider>
